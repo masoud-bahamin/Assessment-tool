@@ -39,6 +39,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <h2>Quiz</h2>
     </div>
   );
 }
