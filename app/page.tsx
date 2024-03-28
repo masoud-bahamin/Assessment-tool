@@ -39,7 +39,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <h2 className="container mx-auto text-2xl p-20">Quiz App</h2>
     </div>
   );
 }
