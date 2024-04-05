@@ -36,6 +36,7 @@ function Sidebar({ admin, teacher }: { admin: boolean; teacher: boolean }) {
             width={200}
             height={80}
             quality={100}
+            priority={true}
           />
         </Link>
         <ul className="mt-4">

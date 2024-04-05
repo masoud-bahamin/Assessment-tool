@@ -118,6 +118,27 @@ function Signin() {
               </Form>
             )}
           </Formik>
+          <div>
+            <table className="mt-6">
+              <tbody className="text-xs">
+                <tr>
+                  <td className="pr-4">user</td>
+                  <td className="pr-4">Email : user@gmail.com</td>
+                  <td className="pr-4">Password: 123456</td>
+                </tr>
+                <tr>
+                  <td className="pr-4">Teacher</td>
+                  <td className="pr-4">Email : david@gmail.com</td>
+                  <td className="pr-4">Password: 123456</td>
+                </tr>
+                <tr>
+                  <td className="pr-4">Admin</td>
+                  <td className="pr-4">Email : masoud@gmail.com</td>
+                  <td className="pr-4">Password: 123456</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>

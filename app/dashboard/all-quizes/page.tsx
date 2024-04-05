@@ -1,12 +1,21 @@
 import MoreModal from "@/components/modules/Modal/MoreModal";
 import quizModel from "@/models/quizModel";
+import { isAdmin, isTeacher } from "@/utils/checkUser";
 import connectToDb from "@/utils/connectToDb";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
 async function allQuizes() {
   connectToDb();
   const quizes: any[] = await quizModel.find({});
+
+  const admin = await isAdmin();
+  const teacher = await isTeacher();
+
+  if (!admin && !teacher) {
+    return redirect("/signin");
+  }
 
   return (
     <div className=" overflow-x-hidden p-6 text-text-200">

@@ -2,6 +2,7 @@
 
 import { registerSchema } from "@/validations/client/user";
 import { Field, Form, Formik } from "formik";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
@@ -29,7 +30,7 @@ function Signup() {
     <>
       <div className="min-h-screen flex items-center justify-center w-full text-text-200">
         <div className="bg-white shadow-md rounded-lg px-8 py-6 max-w-md">
-          <h1 className="text-2xl font-bold text-center mb-4">Welcome Back!</h1>
+          <h1 className="text-2xl font-bold text-center mb-4">Welcome !</h1>
           <Formik
             onSubmit={(values) => registerUser(values.email, values.password)}
             initialValues={{ email: "", password: "" }}
@@ -93,12 +94,12 @@ function Signup() {
                       Remember me
                     </label>
                   </div>
-                  <a
-                    href="#"
+                  <Link
+                    href="/signin"
                     className="text-xs text-primary-300 hover:text-text-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-300"
                   >
                     Have Account?
-                  </a>
+                  </Link>
                 </div>
                 <button
                   disabled={isSubmitting}
