@@ -7,11 +7,11 @@ function Hero() {
       <Image
         src="/img/bannerpic.jpeg"
         alt="baner"
-        className="-z-10"
+        className="-z-10 brightness-[30%]"
         layout="fill"
         objectFit="cover"
       />
-      <div className="text-white flex flex-col items-center justify-center h-[91vh] bg-[rgba(10,10,10,.6)]">
+      <div className="text-white flex flex-col items-center justify-center h-screen ">
         <p className="text-6xl text-gray-100 mb-6">QUIZ APP</p>
         <p className="max-w-xl leading-8 mb-6">
           Effortlessly assess and engage your students while visualizing

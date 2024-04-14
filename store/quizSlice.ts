@@ -29,6 +29,7 @@ export const createQuiz = createAsyncThunk(
           icon: "success",
           text: "save successfull",
         });
+        localStorage.removeItem(title);
       } else if (res.status === 400) {
         const data = await res.json();
         Swal.fire({

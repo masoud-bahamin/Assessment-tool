@@ -4,6 +4,7 @@ import { createQuiz } from "@/store/quizSlice";
 import { DispatchType, StateType } from "@/store/store";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 function CreateQuizSection() {
   const [title, setTitle] = useState("");
@@ -50,20 +51,42 @@ function CreateQuizSection() {
   };
 
   const addQuestion = () => {
-    const newItem = {
-      _id: crypto.randomUUID(),
-      question,
-      answer:
-        trueFalseAnswer === "true" || trueFalseAnswer === "false"
-          ? trueFalseAnswer
-          : answers,
-    };
-    setQuestions((prev) => [...prev, newItem]);
-    localStorage.setItem(title, JSON.stringify([...questions, newItem]));
-    setMore(false);
-    setTrueFalseAnswer("idle");
-    setQuestion("");
+    if (
+      question &&
+      ((answers.correctAnswer &&
+        answers.wrongeAnswer1 &&
+        answers.wrongeAnswer2 &&
+        answers.wrongeAnswer3) ||
+        trueFalseAnswer === "false" ||
+        trueFalseAnswer === "true")
+    ) {
+      const newItem = {
+        _id: crypto.randomUUID(),
+        question,
+        answer:
+          trueFalseAnswer === "true" || trueFalseAnswer === "false"
+            ? trueFalseAnswer
+            : answers,
+      };
+      setQuestions((prev) => [...prev, newItem]);
+      localStorage.setItem(title, JSON.stringify([...questions, newItem]));
+      setMore(false);
+      setTrueFalseAnswer("idle");
+      setQuestion("");
+      setAnswers({
+        correctAnswer: "",
+        wrongeAnswer1: "",
+        wrongeAnswer2: "",
+        wrongeAnswer3: "",
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        text: "please complete the fildes",
+      });
+    }
   };
+
   const dispatch: DispatchType = useDispatch();
   const saveQuiz = async () => {
     dispatch(createQuiz({ questions, title }));

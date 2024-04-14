@@ -9,7 +9,6 @@ function shuffleArray(array: [string, string][]) {
   const array4 = [];
   for (let i = array.length - 1; i >= 0; i--) {
     const randomIndex = Math.floor(Math.random() * array.length);
-    console.log(randomIndex);
 
     if (randomIndex < array.length - 1 && randomIndex >= array.length - 2) {
       array1.push(array[i]);

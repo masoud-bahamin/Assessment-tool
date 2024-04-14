@@ -1,5 +1,6 @@
 import MoreModal from "@/components/modules/Modal/MoreModal";
 import quizModel from "@/models/quizModel";
+import resultModel from "@/models/TestResult";
 import userModel from "@/models/userModel";
 import { isAdmin, isTeacher } from "@/utils/checkUser";
 import connectToDb from "@/utils/connectToDb";
@@ -10,6 +11,12 @@ async function Dashboard() {
   connectToDb();
   const quizes: any[] = await quizModel.find({});
   const users: any[] = await userModel.find({}, "-password -__v");
+  const results = await resultModel
+    .find({})
+    .populate("userId")
+    .populate("quizId");
+  console.log(results);
+
   const admin = await isAdmin();
   const teacher = await isTeacher();
 
@@ -421,7 +428,7 @@ async function Dashboard() {
           </div>
         </div>
       ) : null}
-      {teacher ? (
+      {teacher || admin ? (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
           <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
             <div className="flex justify-between mb-4 items-start">
@@ -484,7 +491,7 @@ async function Dashboard() {
 
           <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div className="flex justify-between mb-4 items-start">
-              <div className="font-medium">Earnings</div>
+              <div className="font-medium">Learnings</div>
               <div className="group">
                 <button
                   type="button"
@@ -529,7 +536,7 @@ async function Dashboard() {
                       Service
                     </th>
                     <th className="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">
-                      Earning
+                      Score
                     </th>
                     <th className="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left rounded-tr-md rounded-br-md">
                       Status
@@ -537,114 +544,47 @@ async function Dashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="py-2 px-4 border-b border-b-gray-50">
-                      <div className="flex items-center">
-                        <img
-                          src="https://placehold.co/32x32"
-                          alt=""
-                          className="w-8 h-8 rounded object-cover block"
-                        />
-                        <a
-                          href="#"
-                          className="text-text-100 text-sm font-medium hover:text-primary-300 ml-2 truncate"
-                        >
-                          Create landing page
-                        </a>
-                      </div>
-                    </td>
-                    <td className="py-2 px-4 border-b border-b-gray-50">
-                      <span className="text-[13px] font-medium text-primary-200">
-                        +$235
-                      </span>
-                    </td>
-                    <td className="py-2 px-4 border-b border-b-gray-50">
-                      <span className="inline-block p-1 rounded bg-green-100 text-primary-300 font-medium text-[12px] leading-none">
-                        Pending
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 px-4 border-b border-b-gray-50">
-                      <div className="flex items-center">
-                        <img
-                          src="https://placehold.co/32x32"
-                          alt=""
-                          className="w-8 h-8 rounded object-cover block"
-                        />
-                        <a
-                          href="#"
-                          className="text-text-100 text-sm font-medium hover:text-primary-300 ml-2 truncate"
-                        >
-                          Create landing page
-                        </a>
-                      </div>
-                    </td>
-                    <td className="py-2 px-4 border-b border-b-gray-50">
-                      <span className="text-[13px] font-medium text-accent-200">
-                        -$235
-                      </span>
-                    </td>
-                    <td className="py-2 px-4 border-b border-b-gray-50">
-                      <span className="inline-block p-1 rounded bg-rose-500/10 text-accent-200 font-medium text-[12px] leading-none">
-                        Withdrawn
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 px-4 border-b border-b-gray-50">
-                      <div className="flex items-center">
-                        <img
-                          src="https://placehold.co/32x32"
-                          alt=""
-                          className="w-8 h-8 rounded object-cover block"
-                        />
-                        <a
-                          href="#"
-                          className="text-text-100 text-sm font-medium hover:text-primary-300 ml-2 truncate"
-                        >
-                          Create landing page
-                        </a>
-                      </div>
-                    </td>
-                    <td className="py-2 px-4 border-b border-b-gray-50">
-                      <span className="text-[13px] font-medium text-primary-200">
-                        +$235
-                      </span>
-                    </td>
-                    <td className="py-2 px-4 border-b border-b-gray-50">
-                      <span className="inline-block p-1 rounded bg-green-100 text-primary-300 font-medium text-[12px] leading-none">
-                        Pending
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 px-4 border-b border-b-gray-50">
-                      <div className="flex items-center">
-                        <img
-                          src="https://placehold.co/32x32"
-                          alt=""
-                          className="w-8 h-8 rounded object-cover block"
-                        />
-                        <a
-                          href="#"
-                          className="text-text-100 text-sm font-medium hover:text-primary-300 ml-2 truncate"
-                        >
-                          Create landing page
-                        </a>
-                      </div>
-                    </td>
-                    <td className="py-2 px-4 border-b border-b-gray-50">
-                      <span className="text-[13px] font-medium text-accent-200">
-                        -$235
-                      </span>
-                    </td>
-                    <td className="py-2 px-4 border-b border-b-gray-50">
-                      <span className="inline-block p-1 rounded bg-rose-500/10 text-accent-200 font-medium text-[12px] leading-none">
-                        Withdrawn
-                      </span>
-                    </td>
-                  </tr>
+                  {results.map((result: any) => (
+                    <tr key={result._id}>
+                      <td className="py-2 px-4 border-b border-b-gray-50">
+                        <div className="flex items-center">
+                          <img
+                            src="https://placehold.co/32x32"
+                            alt=""
+                            className="w-8 h-8 rounded object-cover block"
+                          />
+                          <a
+                            href="#"
+                            className="text-text-100 text-sm font-medium hover:text-primary-300 ml-2 truncate"
+                          >
+                            {result.userId.email}
+                          </a>
+                        </div>
+                      </td>
+                      <td className="py-2 px-4 border-b border-b-gray-50">
+                        {Number(result.result) > 2 / 5 ? (
+                          <span className="text-[13px] font-medium text-primary-200">
+                            {Math.round(result.result * 10)} / 10
+                          </span>
+                        ) : (
+                          <span className="text-[13px] font-medium text-accent-200">
+                            {Math.round(result.result * 10)} / 10
+                          </span>
+                        )}
+                      </td>
+                      <td className="py-2 px-4 border-b border-b-gray-50">
+                        {Number(result.result) > 2 / 5 ? (
+                          <span className="inline-block p-1 rounded bg-green-100 text-primary-300 font-medium text-[12px] leading-none">
+                            Success
+                          </span>
+                        ) : (
+                          <span className="inline-block p-1 rounded bg-rose-500/10 text-accent-200 font-medium text-[12px] leading-none">
+                            Unsuccess
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

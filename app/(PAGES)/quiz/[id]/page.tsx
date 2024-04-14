@@ -20,7 +20,10 @@ async function QuizInfo({ params }: { params: { id: string } }) {
         <Image src={"/img/q1.png"} alt="quiz" width={400} height={400} />
       </div>
 
-      <Quiz quiz={JSON.parse(JSON.stringify(quiz))} />
+      <Quiz
+        quiz={JSON.parse(JSON.stringify(quiz))}
+        userId={JSON.parse(JSON.stringify(user._id))}
+      />
     </div>
   );
 }

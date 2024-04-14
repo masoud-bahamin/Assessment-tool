@@ -28,7 +28,13 @@ const reducer = (state: { count: number }, action: ActionType) => {
   }
 };
 
-function Quiz({ quiz }: { quiz: QuisType }) {
+function Quiz({
+  quiz,
+  userId,
+}: {
+  quiz: QuisType & { _id: String };
+  userId: String;
+}) {
   const [state, dispatch] = useReducer(reducer, { count: 0 });
   const [answers, setAnswers] = useState<{ _id: string; answer: string }[]>([]);
   const [corectAnswersCount, setcorectAnswersCount] = useState(0);
@@ -43,6 +49,30 @@ function Quiz({ quiz }: { quiz: QuisType }) {
     }, 0);
     setcorectAnswersCount(newCorectAnswersCount);
   }, [answers]);
+
+  const saveResult = async () => {
+    const res = await fetch("/api/result", {
+      method: "POST",
+      body: JSON.stringify({
+        result: corectAnswersCount / state.count,
+        userId,
+        quizId: quiz._id,
+      }),
+    });
+    console.log(res);
+    const data = await res.json();
+    console.log(data);
+  };
+
+  const nextHandler = () => {
+    dispatch({ type: "add", payload: 1 });
+  };
+
+  useEffect(() => {
+    if (state.count === quiz.questions.length) {
+      saveResult();
+    }
+  }, [state.count]);
 
   if (state.count === quiz.questions.length) {
     return (
@@ -61,25 +91,20 @@ function Quiz({ quiz }: { quiz: QuisType }) {
         </p>
       </div>
     );
-  }
-
-  const nextHandler = () => {
-    dispatch({ type: "add", payload: 1 });
-  };
-
-  return (
-    <div className="max-w-4xl px-4 lg:px-20 py-12">
-      <h1>
-        {answers.length} / {quiz.questions.length}
-      </h1>
-      {state.count >= 0 && state.count < quiz.questions.length ? (
-        <>
-          <QuestionSection
-            nextHandler={nextHandler}
-            {...quiz.questions[state.count]}
-            setAnswers={setAnswers}
-          />
-          {/* {state.count > 0 ? (
+  } else {
+    return (
+      <div className="max-w-4xl px-4 lg:px-20 py-12">
+        <h1>
+          {answers.length} / {quiz.questions.length}
+        </h1>
+        {state.count >= 0 && state.count < quiz.questions.length ? (
+          <>
+            <QuestionSection
+              nextHandler={nextHandler}
+              {...quiz.questions[state.count]}
+              setAnswers={setAnswers}
+            />
+            {/* {state.count > 0 ? (
             <button
               onClick={() => dispatch({ type: "minus", payload: 1 })}
               className="py-3 px-6 text-lg rounded-lg border text-primary-200 border-primary-200 mr-3"
@@ -94,10 +119,11 @@ function Quiz({ quiz }: { quiz: QuisType }) {
           >
             next
           </button> */}
-        </>
-      ) : null}
-    </div>
-  );
+          </>
+        ) : null}
+      </div>
+    );
+  }
 }
 
 export default Quiz;
