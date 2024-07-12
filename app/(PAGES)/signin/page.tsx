@@ -20,6 +20,7 @@ function Signin() {
         text: "register successfull",
       });
       router.push("/dashboard");
+      router.refresh();
     } else {
       const data = await res.json();
       Swal.fire({

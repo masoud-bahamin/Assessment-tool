@@ -1,16 +1,17 @@
+import Footer from "@/components/modules/Footer/Footer";
 import Header from "@/components/modules/Header/Header";
 import Hero from "@/components/templates/Home/Hero";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className=" overflow-x-hidden">
       <Header />
       <Hero />
       <div className=" bg-white -mt-4">
         <div className="container py-20 flex flex-wrap md:flex-nowrap gap-20">
           <div>
-            <h3 className="text-3xl mb-6">
+            <h3 className="text-2xl sm:text-3xl mb-6">
               Quiz and Grade at the Speed of Learning
             </h3>
             <p className="leading-10 max-w-[500px] mb-6 text-xl">
@@ -24,7 +25,7 @@ export default function Home() {
               <button className="px-5 py-2 border rounded-lg border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-white">
                 Go to app
               </button>
-              <button className="px-5 py-2 border bg-primary-300 text-white rounded-lg hover:bg-white hover:text-primary-300">
+              <button className="px-12 py-3 border border-white text-white hover:border-primary-300  bg-primary-300 hover:bg-transparent transition-colors duration-300">
                 Contact our team
               </button>
             </div>
@@ -45,7 +46,7 @@ export default function Home() {
           <h3 className="font-bold text-primary-300">WHAT WE DO</h3>
           <div className="border border-primary-300 h-[1px] w-10"></div>
         </div>
-        <h3 className="text-4xl leading-[50px] max-w-[700px] mx-auto font-bold">
+        <h3 className="text-2xl sm:text-4xl leading-[50px] max-w-[700px] mx-auto font-bold">
           Why Choosing Us Is TheBestOption For Your Education
         </h3>
       </div>
@@ -172,7 +173,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="py-20 container flex items-center gap-20">
+      <div className="py-20 container flex flex-wrap md:flex-nowrap items-center gap-20">
         <div>
           <Image alt="" src={`/img/asset-27.webp`} width={1000} height={1000} />
         </div>
@@ -181,7 +182,7 @@ export default function Home() {
             <div className="border border-primary-300 h-[1px] w-10"></div>
             <h3 className="font-bold text-primary-300">STUDY AND RESEARCH</h3>
           </div>
-          <h3 className="text-4xl leading-[50px] max-w-[700px] font-bold mb-6">
+          <h3 className="text-2xl sm:text-4xl leading-[50px] max-w-[700px] font-bold mb-6">
             Remarkable Research And OutstandingTeaching Expertise
           </h3>
           <p className=" font-light leading-8 text-text-100 mb-6">
@@ -214,6 +215,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

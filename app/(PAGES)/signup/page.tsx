@@ -19,6 +19,7 @@ function Signup() {
         text: "register successfull",
       });
       router.push("/dashboard");
+      router.refresh();
     } else {
       Swal.fire({
         icon: "error",

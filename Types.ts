@@ -16,3 +16,11 @@ interface QuisType {
   isOpen: boolean;
   title: string;
 }
+interface userType {
+  email: string;
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  phone: string;
+  parent: string;
+}

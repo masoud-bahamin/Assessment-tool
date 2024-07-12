@@ -15,7 +15,11 @@ export async function getUserInfoFromToken() {
   if (!email) {
     return null;
   }
-  const userInfo = await userModel.findOne({ email }).populate("Tests").lean();
+  const userInfo = await userModel
+    .findOne({ email })
+    .populate("Tests")
+    .populate("TestsResult")
+    .lean();
   return userInfo;
 }
 

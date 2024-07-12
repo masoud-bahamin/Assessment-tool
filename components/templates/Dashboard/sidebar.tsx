@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import Logout from "./Logout";
 
 function Sidebar({ admin, teacher }: { admin: boolean; teacher: boolean }) {
   const [showSide, setShowSide] = useState(false);
@@ -40,32 +41,32 @@ function Sidebar({ admin, teacher }: { admin: boolean; teacher: boolean }) {
           />
         </Link>
         <ul className="mt-4">
+          <span className="text-bg-300 font-semibold">DASHBOARD</span>
+          <li className="mb-1 group">
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-1 p-2 hover:bg-text-200 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-text-200 group-[.selected]:text-gray-100"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                  d="m2 8l9.732-4.866a.6.6 0 0 1 .536 0L22 8m-2 3v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"
+                />
+              </svg>
+              <span className="text-sm">Dashboard</span>
+            </Link>
+          </li>
           {admin ? (
             <>
-              <span className="text-bg-300 font-semibold">ADMIN</span>
-              <li className="mb-1 group">
-                <Link
-                  href="/dashboard"
-                  className="flex items-center gap-1 p-2 hover:bg-text-200 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-text-200 group-[.selected]:text-gray-100"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                      d="m2 8l9.732-4.866a.6.6 0 0 1 .536 0L22 8m-2 3v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"
-                    />
-                  </svg>
-                  <span className="text-sm">Dashboard</span>
-                </Link>
-              </li>
               <li className="mb-1 group">
                 <Link
                   href="/dashboard/students"
@@ -261,6 +262,7 @@ function Sidebar({ admin, teacher }: { admin: boolean; teacher: boolean }) {
               </span>
             </Link>
           </li>
+          <Logout />
         </ul>
       </div>
       {showSide && (

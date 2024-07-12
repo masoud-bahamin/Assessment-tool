@@ -1,9 +1,8 @@
+const mongoose = require("mongoose");
 import quizModel from "./quizModel";
 import userModel from "./userModel";
 
-const mongoose = require("mongoose");
-
-const schema = new mongoose.Schema(
+const schema = mongoose.Schema(
   {
     quizId: {
       type: mongoose.Types.ObjectId,
@@ -13,7 +12,7 @@ const schema = new mongoose.Schema(
     userId: {
       type: mongoose.Types.ObjectId,
       required: true,
-      ref: userModel,
+      ref: "User",
     },
     result: {
       type: Number,

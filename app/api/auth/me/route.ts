@@ -13,8 +13,9 @@ export async function GET(req: NextRequest) {
       const email = verifyToken(token);
       connectToDb();
       const user = await userModel
-        .findOne({ email }, "-__v")
+        .findOne({ email }, "-__v -password")
         .populate("Tests", "-__v")
+        .populate("TestsResult")
         .lean();
       return NextResponse.json({ result: true, user }, { status: 200 });
     } else {

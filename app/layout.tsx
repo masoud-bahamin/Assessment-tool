@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Lato } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "700", "900"],
+});
 
 export const metadata: Metadata = {
   title: "Quiz App",
@@ -19,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={lato.className}>
         {/* <div className="flex z-50 justify-end">
           <div className="h-6 px-5 bg-primary-100">primary-100</div>
           <div className="h-6 px-5 bg-primary-200">primary-200</div>
@@ -31,6 +34,7 @@ export default function RootLayout({
           <div className="h-6 px-5 bg-bg-100">bg-100</div>
           <div className="h-6 px-5 bg-bg-200">bg-200</div>
           <div className="h-6 px-5 bg-bg-300">bg-300</div>
+          <div className="h-6 px-5 bg-dark">dark</div>
         </div> */}
         {children}
       </body>

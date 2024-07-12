@@ -1,9 +1,12 @@
 import MoreModal from "@/components/modules/Modal/MoreModal";
+import EditUserForm from "@/components/templates/Dashboard/EditUserForm";
 import quizModel from "@/models/quizModel";
 import resultModel from "@/models/TestResult";
 import userModel from "@/models/userModel";
-import { isAdmin, isTeacher } from "@/utils/checkUser";
+import { getUserInfoFromToken, isAdmin, isTeacher } from "@/utils/checkUser";
 import connectToDb from "@/utils/connectToDb";
+
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -15,10 +18,12 @@ async function Dashboard() {
     .find({})
     .populate("userId")
     .populate("quizId");
-  console.log(results);
 
   const admin = await isAdmin();
   const teacher = await isTeacher();
+  const userInfo: userType & {
+    TestsResult: [{ result: number }];
+  } = await getUserInfoFromToken();
 
   return (
     <div className="p-6 text-text-200">
@@ -78,12 +83,16 @@ async function Dashboard() {
           <div className="flex justify-between mb-4">
             <div>
               <div className="flex items-center mb-1">
-                <div className="text-2xl font-semibold">100</div>
+                <div className="text-2xl font-semibold">
+                  {userInfo.TestsResult?.length || 0}
+                </div>
                 <div className="p-1 rounded bg-green-100 text-primary-300 text-[12px] font-semibold leading-none ml-2">
-                  +30%
+                  +{Math.floor((userInfo.TestsResult[0]?.result || 0) * 100)}%
                 </div>
               </div>
-              <div className="text-sm font-medium text-gray-400">Companies</div>
+              <div className="text-sm font-medium text-gray-400">
+                Completed Quiz
+              </div>
             </div>
             <div className="group">
               <button
@@ -591,6 +600,44 @@ async function Dashboard() {
           </div>
         </div>
       ) : null}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-3">
+          <div className="flex justify-between mb-4 items-start">
+            <div className="font-medium">Student Details</div>
+            <MoreModal />
+          </div>
+          <div className="overflow-x-auto grid grid-cols-1 lg:grid-cols-8 gap-6">
+            <div className="lg:col-span-2">
+              <p className="text-sm mb-2 text-text-200">Photo</p>
+              <Image
+                alt="acount image"
+                width={100}
+                height={100}
+                src={"/img/user.jpg"}
+              />
+              <div className="flex gap-4 mt-4 text-sm">
+                <input
+                  className="sr-only"
+                  type="file"
+                  name="file-input"
+                  id="file-input"
+                  accept=".png , .jpg , .jpeg"
+                />
+                <label
+                  htmlFor="file-input"
+                  className="py-2 px-4 rounded-lg bg-primary-300 text-white hover:bg-primary-200 cursor-pointer"
+                >
+                  Choose File
+                </label>
+                <button className="py-2 px-4 rounded-lg bg-rose-200 text-red-700 hover:bg-rose-300">
+                  remove
+                </button>
+              </div>
+            </div>
+            <EditUserForm />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
