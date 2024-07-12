@@ -17,11 +17,14 @@ export default async function LoginButton() {
         <>
           <Link
             href={"/signin"}
-            className="hidden md:inline-block px-12 py-3 border border-white text-white hover:border-primary-300  bg-primary-300 hover:bg-transparent transition-colors duration-300"
+            className="hidden ml-10 md:inline-block px-12 py-3 border hover:text-primary-300 text-white border-primary-300    transition-colors duration-300"
           >
             Login
           </Link>
-          <Link href={"/signin"} className="transition-colors duration-300">
+          <Link
+            href={"/signin"}
+            className="md:hidden transition-colors duration-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

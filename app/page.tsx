@@ -22,10 +22,10 @@ export default function Home() {
               learners.
             </p>
             <div className="flex gap-10">
-              <button className="px-5 py-2 border rounded-lg border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-white">
+              <button className="px-5 py-2 border border-primary-300 text-primary-300 hover:bg-primary-300 hover:text-white">
                 Go to app
               </button>
-              <button className="px-12 py-3 border border-white text-white hover:border-primary-300  bg-primary-300 hover:bg-transparent transition-colors duration-300">
+              <button className="px-12 py-3 border border-white text-white hover:text-primary-300 hover:border-primary-300  bg-primary-300 hover:bg-transparent transition-colors duration-300">
                 Contact our team
               </button>
             </div>
