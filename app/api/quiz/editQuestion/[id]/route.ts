@@ -25,7 +25,7 @@ export async function PUT(req: NextRequest, context: Context) {
     //     { status: 400 }
     //   );
     connectToDb();
-    const quiz: QuisType = await quizModel.findOne({
+    const quiz: QuizType = await quizModel.findOne({
       _id: body.QuizId,
     });
 
@@ -36,7 +36,7 @@ export async function PUT(req: NextRequest, context: Context) {
       return item;
     });
 
-    const updateQuiz: QuisType = await quizModel.findOneAndUpdate(
+    const updateQuiz: QuizType = await quizModel.findOneAndUpdate(
       {
         _id: body.QuizId,
       },

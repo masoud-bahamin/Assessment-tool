@@ -46,9 +46,9 @@ export default function Logout() {
     <div>
       <button
         onClick={logoutHandler}
-        className="py-2 px-4 rounded-lg bg-rose-200 text-red-700 hover:bg-rose-300"
+        className="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-rose-400 hover:bg-gray-50 cursor-pointer"
       >
-        Logout
+        Log Out
       </button>
     </div>
   );

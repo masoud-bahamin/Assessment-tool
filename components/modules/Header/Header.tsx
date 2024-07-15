@@ -7,7 +7,7 @@ async function Header() {
   return (
     <div className="bg-dark">
       <div className="container flex items-center justify-between  text-white sticky top-0">
-        <div className="border-l border-l-white">
+        <div className="border-l border-l-white xl:w-80">
           <Image
             src="/img/logo.png"
             alt="bahamin"

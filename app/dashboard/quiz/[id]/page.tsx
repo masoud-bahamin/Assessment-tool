@@ -6,7 +6,7 @@ import React from "react";
 
 async function QuizInfo({ params }: { params: { id: string } }) {
   connectToDb();
-  const quiz: QuisType & { _id: string } = await quizModel.findOne({
+  const quiz: QuizType & { _id: string } = await quizModel.findOne({
     _id: params.id,
   });
 
@@ -121,8 +121,10 @@ async function QuizInfo({ params }: { params: { id: string } }) {
         <div className="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
           <div className="flex justify-between mb-6">
             <div>
-              <div className="text-2xl font-semibold mb-1">84</div>
-              <div className="text-sm font-medium text-gray-400">Tests</div>
+              <div className="text-2xl font-semibold mb-1">
+                {quiz.questions.length}
+              </div>
+              <div className="text-sm font-medium text-gray-400">Questions</div>
             </div>
             <div className="group">
               <button
@@ -169,8 +171,9 @@ async function QuizInfo({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2 mb-6">
+        <h3 className="text-2xl font-semibold mb-3">{quiz.title}</h3>
         <div className="flex justify-between mb-4 items-start">
-          <div className="font-medium">Questions</div>
+          <div className="font-medium">Questions : </div>
           <div className="group">
             <button
               type="button"
@@ -283,40 +286,6 @@ async function QuizInfo({ params }: { params: { id: string } }) {
                   </td>
                 </tr>
               ))}
-
-              {/* <tr>
-                <td className="py-2 px-4 border-b border-b-gray-50">
-                  <div className="flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      className="fill-bg-300"
-                    >
-                      <path d="M16 2H8C4.691 2 2 4.691 2 8v12a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 13c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v7z"></path>
-                    </svg>
-                    <a
-                      href="#"
-                      className="text-text-100 text-sm font-medium hover:text-primary-300 ml-2 truncate max-w-96"
-                    >
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Libero, Lorem ipsum dolor sit amet consectetur adipisicing
-                      elit. Libero, maxime ut laborum dolorum expedita quas?
-                    </a>
-                  </div>
-                </td>
-                <td className="py-2 px-4 border-b border-b-gray-50">
-                  <span className="text-[13px] font-medium text-accent-200">
-                    False
-                  </span>
-                </td>
-                <td className="py-2 px-4 border-b border-b-gray-50">
-                  <span className="inline-block p-1 rounded font-medium text-[12px] leading-none">
-                    Japan
-                  </span>
-                </td>
-              </tr> */}
             </tbody>
           </table>
         </div>

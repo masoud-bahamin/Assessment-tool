@@ -30,6 +30,7 @@ export const createQuiz = createAsyncThunk(
           text: "save successfull",
         });
         localStorage.removeItem(title);
+        localStorage.removeItem("lastTitle");
       } else if (res.status === 400) {
         const data = await res.json();
         Swal.fire({
@@ -65,6 +66,18 @@ const quizSlice = createSlice({
   name: "QUIZ",
   reducers: {},
   initialState,
+  extraReducers: (builder) => {
+    builder
+      .addCase(createQuiz.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(createQuiz.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(createQuiz.rejected, (state, action) => {
+        state.loading = false;
+      });
+  },
 });
 
 export default quizSlice.reducer;

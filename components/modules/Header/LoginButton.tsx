@@ -9,7 +9,7 @@ export default async function LoginButton() {
       {userInfo?.email ? (
         <Link
           href={"/dashboard"}
-          className="rounded-full bg-primary-300 size-10 flex justify-center items-center"
+          className="rounded-full ml-10 bg-primary-300 size-10 flex justify-center items-center"
         >
           {userInfo.email.slice(0, 2)}
         </Link>
@@ -17,13 +17,13 @@ export default async function LoginButton() {
         <>
           <Link
             href={"/signin"}
-            className="hidden ml-10 md:inline-block px-12 py-3 border hover:text-primary-300 text-white border-primary-300    transition-colors duration-300"
+            className="hidden ml-10 lg:inline-block px-12 py-3 border hover:text-primary-300 text-white border-primary-300    transition-colors duration-300"
           >
             Login
           </Link>
           <Link
             href={"/signin"}
-            className="md:hidden transition-colors duration-300"
+            className="lg:hidden transition-colors duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

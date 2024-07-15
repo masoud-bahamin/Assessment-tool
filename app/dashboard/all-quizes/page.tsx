@@ -1,4 +1,5 @@
 import MoreModal from "@/components/modules/Modal/MoreModal";
+import DeleteQuiez from "@/components/templates/Dashboard/DeleteQuiez";
 import quizModel from "@/models/quizModel";
 import { isAdmin, isTeacher } from "@/utils/checkUser";
 import connectToDb from "@/utils/connectToDb";
@@ -123,6 +124,11 @@ async function allQuizes() {
                   <td className="py-2 px-4 border-b border-b-gray-50">
                     <span className="inline-block p-1 rounded font-medium text-[12px] leading-none">
                       Masoud Bahamin
+                    </span>
+                  </td>
+                  <td className="py-2 px-4 border-b border-b-gray-50">
+                    <span className="inline-block p-1 rounded font-medium text-[12px] leading-none">
+                      <DeleteQuiez id={JSON.parse(JSON.stringify(item._id))} />
                     </span>
                   </td>
                 </tr>

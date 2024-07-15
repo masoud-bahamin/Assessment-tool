@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import LoginButton from "./LoginButton";
 import { useState } from "react";
 
 export default function Navbar() {
@@ -64,7 +63,7 @@ export default function Navbar() {
             <Link href={"/dashboard"}>DASHBOARD</Link>
           </li>
         </ul>
-        <div className="flex gap-10 items-center h-fit mt-6 md:mt-0">
+        <div className="hidden xl:flex gap-10 items-center h-fit mt-6 md:mt-0">
           <svg
             className=" cursor-pointer hover:text-primary-100"
             xmlns="http://www.w3.org/2000/svg"
@@ -118,8 +117,6 @@ export default function Navbar() {
               strokeLinejoin="round"
             />
           </svg>
-
-          {/* <LoginButton /> */}
         </div>
       </div>
 

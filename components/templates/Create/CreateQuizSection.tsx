@@ -37,9 +37,7 @@ function CreateQuizSection() {
     setLastTitle(localStorage.getItem("lastTitle"));
   }, []);
 
-  const store = useSelector((state: StateType) => state.QUIZ);
-
-  console.log(store);
+  const { loading } = useSelector((state: StateType) => state.QUIZ);
 
   const answerHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setAnswers((prev) => {
@@ -177,13 +175,18 @@ function CreateQuizSection() {
 
             {showqQuestion ? (
               <button
+                disabled={loading}
                 onClick={() => {
                   saveQuiz();
                 }}
-                className="flex gap-2 ml-auto items-center py-2 px-6 border-b border-b-gray-50 bg-primary-300 text-white hover:bg-primary-200"
+                className={` ${
+                  loading
+                    ? "bg-primary-100 text-primary-300"
+                    : "bg-primary-300 text-white"
+                } flex gap-2 ml-auto items-center py-2 px-6 border-b border-b-gray-50   hover:bg-primary-200`}
               >
                 <span className="inline-block p-1 rounded font-medium text-[12px] leading-none">
-                  Save Quiz
+                  {loading ? "Submiting..." : "Save Quiz"}
                 </span>
               </button>
             ) : null}

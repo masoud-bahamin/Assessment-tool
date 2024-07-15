@@ -16,7 +16,7 @@ function DeleteQuestionSection({ id, QuizId }: { id: string; QuizId: string }) {
     }).then(async (res) => {
       if (res.isConfirmed) {
         try {
-          const res = await fetch(`/api/quiz/delete/${id}`, {
+          const res = await fetch(`/api/quiz/delete-question/${id}`, {
             method: "DELETE",
             body: JSON.stringify({ QuizId }),
           });

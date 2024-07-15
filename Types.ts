@@ -11,7 +11,7 @@ interface QuestionType {
       };
   _id: string;
 }
-interface QuisType {
+interface QuizType {
   questions: QuestionType[];
   isOpen: boolean;
   title: string;

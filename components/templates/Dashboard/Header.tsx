@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import Logout from "./Logout";
 
 function Header({
   username,
@@ -257,15 +258,7 @@ function Header({
               </Link>
             </li>
             <li>
-              <form method="POST" action="">
-                <Link
-                  href="/dashboard"
-                  role="menuitem"
-                  className="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-primary-200 hover:bg-gray-50 cursor-pointer"
-                >
-                  Log Out
-                </Link>
-              </form>
+              <Logout />
             </li>
           </ul>
         </li>

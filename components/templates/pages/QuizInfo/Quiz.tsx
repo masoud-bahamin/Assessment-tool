@@ -32,7 +32,7 @@ function Quiz({
   quiz,
   userId,
 }: {
-  quiz: QuisType & { _id: String };
+  quiz: QuizType & { _id: String };
   userId: String;
 }) {
   const [state, dispatch] = useReducer(reducer, { count: 0 });
