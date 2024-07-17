@@ -15,6 +15,7 @@ interface editForm {
 
 function EditUserForm() {
   const [userInfo, setUserInfo] = useState<null | userType>(null);
+  const [loading, setLoding] = useState(false);
 
   const router = useRouter();
 
@@ -38,13 +39,17 @@ function EditUserForm() {
   };
 
   const getMe = async () => {
+    setLoding(true);
     try {
-      const res = await fetch("api/auth/me");
+      const res = await fetch("/api/auth/me");
       const data = await res.json();
       setUserInfo(data.user);
+      console.log(res);
+      console.log(data);
     } catch (error) {
       console.log("get me catch error in edit form page", error);
     }
+    setLoding(false);
   };
 
   useEffect(() => {
@@ -59,10 +64,17 @@ function EditUserForm() {
     parent: userInfo?.parent || "",
   };
 
-  if (!userInfo)
+  if (loading)
     return (
       <div className="flex justify-center items-center w-full min-h-[50vh]">
         <div className="loader"></div>
+      </div>
+    );
+
+  if (!userInfo)
+    return (
+      <div className="flex justify-center items-center w-full min-h-[50vh]">
+        <div className="">User Information not found</div>
       </div>
     );
 
