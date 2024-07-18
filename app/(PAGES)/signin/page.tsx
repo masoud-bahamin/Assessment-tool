@@ -18,9 +18,12 @@ function Signin() {
       Swal.fire({
         icon: "success",
         text: "register successfull",
+        showConfirmButton: false,
+        timer: 1500,
+        position: "top-end",
       });
-      router.push("/dashboard");
       router.refresh();
+      router.push("/dashboard");
     } else {
       const data = await res.json();
       Swal.fire({
