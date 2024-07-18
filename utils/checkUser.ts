@@ -4,23 +4,27 @@ import { verifyToken } from "./tokenConfigs";
 import userModel from "@/models/userModel";
 
 export async function getUserInfoFromToken() {
-  const allCookie = cookies();
-  const token = allCookie.get("token")?.value;
+  try {
+    connectToDb();
+    const allCookie = cookies();
+    const token = allCookie.get("token")?.value;
 
-  if (!token) {
+    if (!token) {
+      return null;
+    }
+    const email = verifyToken(token);
+    if (!email) {
+      return null;
+    }
+    const userInfo = await userModel
+      .findOne({ email }, "-password")
+      .populate("Tests")
+      .populate("TestsResult")
+      .lean();
+    return userInfo;
+  } catch (error) {
     return null;
   }
-  connectToDb();
-  const email = verifyToken(token);
-  if (!email) {
-    return null;
-  }
-  const userInfo = await userModel
-    .findOne({ email }, "-password")
-    .populate("Tests")
-    .populate("TestsResult")
-    .lean();
-  return userInfo;
 }
 
 export async function isAdmin() {
