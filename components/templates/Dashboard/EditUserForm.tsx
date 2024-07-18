@@ -41,7 +41,9 @@ function EditUserForm() {
   const getMe = async () => {
     setLoding(true);
     try {
-      const res = await fetch("/api/auth/me");
+      const res = await fetch(
+        "https://bahamin-assessment.vercel.app/api/auth/me"
+      );
       const data = await res.json();
       setUserInfo(data.user);
       console.log(res);
