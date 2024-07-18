@@ -26,10 +26,11 @@ export async function GET(req: NextRequest) {
     }
     console.log("emaaaaaaaaaaaaaaaaaaaaaaail", email);
 
-    const user = await userModel.findOne({ email }, "-__v -password");
-    // .populate("Tests", "-__v")
-    // .populate("TestsResult")
-    // .lean();
+    const user = await userModel
+      .findOne({ email }, "-__v -password")
+      .populate("Tests", "-__v")
+      .populate("TestsResult")
+      .lean();
     return NextResponse.json({ result: true, user }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ result: false }, { status: 500 });

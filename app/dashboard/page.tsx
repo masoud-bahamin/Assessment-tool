@@ -634,7 +634,7 @@ async function Dashboard() {
                 </button>
               </div>
             </div>
-            <EditUserForm />
+            <EditUserForm userInfo={JSON.parse(JSON.stringify(userInfo))} />
           </div>
         </div>
       </div>

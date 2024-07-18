@@ -13,11 +13,11 @@ interface editForm {
   parent: string;
 }
 
-function EditUserForm() {
-  const [userInfo, setUserInfo] = useState<null | userType>(null);
+function EditUserForm({ userInfo }: { userInfo: null | userType }) {
   const [loading, setLoding] = useState(false);
 
   const router = useRouter();
+  console.log(userInfo);
 
   const submitForm = async (formValues: editForm) => {
     try {
@@ -38,23 +38,23 @@ function EditUserForm() {
     }
   };
 
-  const getMe = async () => {
-    setLoding(true);
-    try {
-      const res = await fetch("/api/auth/me");
-      const data = await res.json();
-      setUserInfo(data.user);
-      console.log(res);
-      console.log(data);
-    } catch (error) {
-      console.log("get me catch error in edit form page", error);
-    }
-    setLoding(false);
-  };
+  // const getMe = async () => {
+  //   setLoding(true);
+  //   try {
+  //     const res = await fetch("/api/auth/me");
+  //     const data = await res.json();
+  //     setUserInfo(data.user);
+  //     console.log(res);
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log("get me catch error in edit form page", error);
+  //   }
+  //   setLoding(false);
+  // };
 
-  useEffect(() => {
-    getMe();
-  }, []);
+  // useEffect(() => {
+  //   getMe();
+  // }, []);
 
   const intialValuesForm = {
     firstName: userInfo?.firstName || "",

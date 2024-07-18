@@ -1,10 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
 
-const getAllQuizFromServer = createAsyncThunk(
-  "quiz/getAllquiz",
-  async () => {}
-);
 export const createQuiz = createAsyncThunk(
   "quiz/createQuiz",
   async ({

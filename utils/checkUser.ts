@@ -16,7 +16,7 @@ export async function getUserInfoFromToken() {
     return null;
   }
   const userInfo = await userModel
-    .findOne({ email })
+    .findOne({ email }, "-password")
     .populate("Tests")
     .populate("TestsResult")
     .lean();

@@ -11,4 +11,4 @@ export type DispatchType = typeof store.dispatch;
 
 export type StateType = ReturnType<typeof store.getState>;
 
-export default store;
+// export default store;

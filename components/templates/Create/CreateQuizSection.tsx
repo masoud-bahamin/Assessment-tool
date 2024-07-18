@@ -1,9 +1,6 @@
 "use client";
 
-import { createQuiz } from "@/store/quizSlice";
-import { DispatchType, StateType } from "@/store/store";
 import { ChangeEvent, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 function CreateQuizSection() {
@@ -13,6 +10,7 @@ function CreateQuizSection() {
   const [question, setQuestion] = useState("");
   const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [more, setMore] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [trueFalseAnswer, setTrueFalseAnswer] = useState<
     "true" | "false" | "idle" | "hidden"
   >("idle");
@@ -22,6 +20,44 @@ function CreateQuizSection() {
     wrongeAnswer2: "",
     wrongeAnswer3: "",
   });
+
+  const saveQuiz = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/quiz/create", {
+        method: "POST",
+        body: JSON.stringify({
+          questions,
+          isOpen: true,
+          title: title || Date.now(),
+        }),
+      });
+      console.log(res);
+      if (res.status === 201) {
+        Swal.fire({
+          icon: "success",
+          text: "save successfull",
+        });
+        localStorage.removeItem(title);
+        localStorage.removeItem("lastTitle");
+      } else if (res.status === 400) {
+        const data = await res.json();
+        Swal.fire({
+          icon: "error",
+          text: data.error[0].message,
+        });
+      }
+      setLoading(false);
+      return true;
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      Swal.fire({
+        icon: "error",
+      });
+      return false;
+    }
+  };
 
   const getLocalData = () => {
     const store = localStorage.getItem(title);
@@ -36,8 +72,6 @@ function CreateQuizSection() {
 
     setLastTitle(localStorage.getItem("lastTitle"));
   }, []);
-
-  const { loading } = useSelector((state: StateType) => state.QUIZ);
 
   const answerHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setAnswers((prev) => {
@@ -83,11 +117,6 @@ function CreateQuizSection() {
         text: "please complete the fildes",
       });
     }
-  };
-
-  const dispatch: DispatchType = useDispatch();
-  const saveQuiz = async () => {
-    dispatch(createQuiz({ questions, title }));
   };
 
   return (
