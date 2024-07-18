@@ -22,8 +22,9 @@ function Signin() {
         timer: 1500,
         position: "top-end",
       });
-      router.refresh();
+      window.location.replace("/dashboard");
       router.push("/dashboard");
+      router.refresh();
     } else {
       const data = await res.json();
       Swal.fire({
